@@ -1,12 +1,3 @@
-# AWS CodeBuild buildspec to build the nginx alpine image
-# By Jason Umiker (jason.umiker@gmail.com)
-
-# This requires the following environment variables be set on the Project:
-# AWS_DEFAULT_REGION (Supplied by CodeBuild)
-# AWS_ACCOUNT_ID
-# IMAGE_REPO_NAME
-# IMAGE_TAG
-
 version: 0.2
 
 phases:
@@ -18,7 +9,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - REPOSITORY_URI=620656356969.dkr.ecr.us-east-1.amazonaws.com/nginx
+      - REPOSITORY_URI=620656356969.dkr.ecr.us-east-1.amazonaws.com/canvas-frontend
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
@@ -34,7 +25,6 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"NGINX","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-
+      - printf '[{"name":"canvas-frontend","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
-  files: imagedefinitions.json
+    files: imagedefinitions.json
