@@ -1,4 +1,4 @@
-export const API_BASE_URL = "http://127.0.0.1:8080";
+export const API_BASE_URL = "http://127.0.0.1:8080zzz";
 export const ACCESS_TOKEN = "access_token";
 
 const getOptions = (params) => {
@@ -32,7 +32,7 @@ const request = async (url, method) => {
 };
 
 export function getCurrentUser() {
-  return request(API_BASE_URL + "/user/me", { method: "GET", secured: true });
+  return request("/user/me", { method: "GET", secured: true });
 }
 
 export const login = () => {

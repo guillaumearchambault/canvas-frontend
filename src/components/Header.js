@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import { Store } from "../Store";
 import { useAuth } from "../useAuth";
-import { getCurrentUser } from "../api/auth";
+import { getCurrentUser } from "../api/api";
 import { Button, AppBar } from "@material-ui/core";
 import Container from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
@@ -111,10 +111,10 @@ const Header = (props) => {
             {state.user ? (
               <UserInfo style={border} user={state.user} logout={logout} />
             ) : (
-              <Button onClick={auth.signin} style={border}>
-                Sign in
-              </Button>
-            )}
+                <Button onClick={auth.signin} style={border}>
+                  Sign in
+                </Button>
+              )}
           </Grid>
         </Grid>
       </AppBar>
