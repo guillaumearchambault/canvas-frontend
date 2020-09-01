@@ -13,7 +13,7 @@ const Home = () => {
   }, []);
 
   return <Box pt={0}>
-    <p>Welcome home, testing my pipeline with aws. With Qooch and Kid</p>
+    <p>Welcome home, testing my pipeline with aws, running front end on a seperate machine</p>
     <p>Health check of the api ...: {health ? health.message : null}</p>
   </Box>;
 };
